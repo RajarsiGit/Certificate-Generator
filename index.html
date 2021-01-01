@@ -9,30 +9,30 @@
     <body>
         <div class="container text-center p-3">
             <div class="row d-flex justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-8 mb-3">
                     <canvas id="canvas" class="border border-secondary" style="width: 100%;"></canvas>
                 </div>
             </div>
             <div class="row d-flex justify-content-center form-group">
-                <div class="col-md-6 mt-3 mb-2">
+                <div class="col-md-6 mt-2 mb-2">
                     <input type="file" class="form-control" id="file" accept="image/png">
                 </div>
             </div>
             <div class="row d-flex justify-content-center form-group">
-                <div class="col-md-6 mt-3 mb-2">
+                <div class="col-md-6 mt-2 mb-2">
                     <input type="text" class="form-control" id="name" placeholder="Full Name">
                 </div>
             </div>
             <div class="row d-flex justify-content-center form-group">
-                <div class="col-md-6 mt-3 mb-2">
+                <div class="col-md-6 mt-2 mb-2">
                     <input type="date" class="form-control" id="date" placeholder="dd-mm-yyyy">
                 </div>
             </div>
             <div class="row d-flex justify-content-center form-group">
-                <div class="col-md-6 mt-3 mb-3">
+                <div class="col-md-6 mt-2 mb-2">
                     <button id="add" class="btn btn-primary px-4">Add Data</button>
                 </div>
-                <div class="col-md-6 mt-3 mb-3">
+                <div class="col-md-6 mt-2 mb-2">
                     <button id="download" class="btn btn-success px-4">Download</button>
                 </div>
             </div>
@@ -69,13 +69,18 @@
                         alert("Add Name and Date!");
                     }
                     else {
-                        ctx.font = "375px Alex Brush";
+                        if(name.length > 12) {
+                            ctx.font = "275px Alex Brush";
+                        }
+                        else {
+                            ctx.font = "375px Alex Brush";
+                        }
                         ctx.fillText(name, 400, 1375);
                         date = date.split("-").reverse().join("-");
                         ctx.font = "64px Lato";
                         ctx.fillText(date, 600, 1965);
                     }
-                })
+                });
                 $('#download').click(function() {
                     var imgData = document.getElementById('canvas').toDataURL("image/png", 1.0);
                     var pdf = jsPDF('l', 'mm', [297, 210]);
