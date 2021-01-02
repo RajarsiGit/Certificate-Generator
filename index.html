@@ -45,22 +45,18 @@
             $(document).ready(function() {
                 let fileInput = document.getElementById('file');
                 let name = "Default";
-
-                fileInput.addEventListener('change', function(ev) {
-                    if(ev.target.files) {
-                        let file = ev.target.files[0];
-                        var reader  = new FileReader();
-                        reader.readAsDataURL(file);
-                        reader.onloadend = function (e) {
-                            var image = new Image();
-                            image.src = e.target.result;
-                            image.onload = function(ev) {
-                                var canvas = document.getElementById('canvas');
-                                canvas.width = image.width;
-                                canvas.height = image.height;
-                                var ctx = canvas.getContext('2d');
-                                ctx.drawImage(image, 0, 0);
-                            }
+                fileInput.addEventListener('change', function() {
+                    var reader  = new FileReader();
+                    reader.readAsDataURL(fileInput.files[0]);
+                    reader.onloadend = function() {
+                        var image = new Image();
+                        image.src = reader.result;
+                        image.onload = function() {
+                            var canvas = document.getElementById('canvas');
+                            canvas.width = image.width;
+                            canvas.height = image.height;
+                            var ctx = canvas.getContext('2d');
+                            ctx.drawImage(image, 0, 0);
                         }
                     }
                 });
